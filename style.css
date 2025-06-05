@@ -1,40 +1,86 @@
 /* Basic CSS boilerplate for Whack A Mole */
 body {
-    font-family: Arial, sans-serif;
-    background: #f0f0f0;
+    font-family: 'Courier New', monospace;
+    background-color: #111;
+    color: #90ee90;
+    text-align: center;
     margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
+    padding: 20px;
 }
 
 h1 {
-    margin-top: 40px;
-    color: #333;
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    color: #90ee90; /* Match the rest of the text color */
 }
 
-#game-container {
+.score-timer {
+    display: flex;
+    justify-content: space-between;
+    max-width: 400px;
+    margin: 0 auto 20px;
+    font-size: 1.2em;
+}
+
+.grid {
     margin-top: 30px;
     display: grid;
-    grid-template-columns: repeat(3, 100px);
+    grid-template-columns: repeat(4, 80px);
     grid-gap: 15px;
     justify-content: center;
 }
 
-.mole {
-    width: 100px;
-    height: 100px;
-    background: #8bc34a;
+.hole {
+    width: 80px;
+    height: 80px;
+    border: 2px solid #90ee90;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 2em;
     cursor: pointer;
-    transition: background 0.2s;
+    position: relative;
 }
 
-.mole.active {
-    background: #ff5722;
+.bug {
+    color: limegreen;
+}
+
+.squashed {
+    color: lightgreen;
+}
+
+.bomb {
+  color: #ff4444; /* Red color for bombs */
+}
+
+#game-over {
+    margin-top: 20px;
+    font-size: 1.5em;
+    color: red;
+}
+
+/* New styles for the reset button */
+#reset-btn, #pause-btn {
+    background-color: #90ee90;
+    color: #111;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    cursor: pointer;
+    margin-bottom: 20px;
+    margin-right: 10px; /* Add space between buttons */
+}
+
+#reset-btn:hover, #pause-btn:hover {
+    background-color: #76c776;
+}
+
+/* Style for the special caterpillar */
+.caterpillar {
+  color: #90ee90;
+  font-weight: bold;
+  text-shadow: 0 0 5px #90ee90;
 }

@@ -4,63 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bug Bash!</title>
-  <style>
-    body {
-      font-family: 'Courier New', monospace;
-      background-color: #111;
-      color: #90ee90;
-      text-align: center;
-      margin: 0;
-      padding: 20px;
-    }
-
-    h1 {
-      font-size: 2.5em;
-      margin-bottom: 10px;
-    }
-
-    .score-timer {
-      display: flex;
-      justify-content: space-between;
-      max-width: 400px;
-      margin: 0 auto 20px;
-      font-size: 1.2em;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(4, 80px);
-      grid-gap: 15px;
-      justify-content: center;
-    }
-
-    .hole {
-      width: 80px;
-      height: 80px;
-      border: 2px solid #90ee90;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2em;
-      cursor: pointer;
-      position: relative;
-    }
-
-    .bug {
-      color: limegreen;
-    }
-
-    .squashed {
-      color: lightgreen;
-    }
-
-    #game-over {
-      margin-top: 20px;
-      font-size: 1.5em;
-      color: red;
-    }
-  </style>
+  <!-- Link to external CSS file for all styles -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <h1>BUG BASH!</h1>
@@ -68,6 +13,10 @@
     <div>Score: <span id="score">0</span></div>
     <div>Time: <span id="timer">30</span>s</div>
   </div>
+  <!-- Reset button for restarting the game -->
+  <button id="reset-btn">Reset Game</button>
+  <!-- Pause button for pausing the game -->
+  <button id="pause-btn">Pause</button>
   <div class="grid" id="grid">
     <!-- 12 Holes -->
     <div class="hole" data-index="0"></div>
@@ -85,74 +34,7 @@
   </div>
   <div id="game-over"></div>
 
-  <script>
-    const holes = document.querySelectorAll('.hole');
-    const scoreEl = document.getElementById('score');
-    const timerEl = document.getElementById('timer');
-    const gameOverEl = document.getElementById('game-over');
-
-    let score = 0;
-    let timeLeft = 30;
-    let gameInterval;
-    let bugInterval;
-    let gameActive = true;
-
-    function randomHole() {
-      return holes[Math.floor(Math.random() * holes.length)];
-    }
-
-    function showBug() {
-      if (!gameActive) return;
-      const hole = randomHole();
-      if (hole.classList.contains('bug')) return;
-
-      hole.textContent = '🐛';
-      hole.classList.add('bug');
-
-      const hideTimer = setTimeout(() => {
-        if (hole.classList.contains('bug')) {
-          hole.textContent = '';
-          hole.classList.remove('bug');
-        }
-      }, 1000 + Math.random() * 1000);
-
-      hole.onclick = () => {
-        if (!hole.classList.contains('bug') || !gameActive) return;
-        score += 10;
-        scoreEl.textContent = score;
-        hole.textContent = '💥';
-        hole.classList.remove('bug');
-        hole.classList.add('squashed');
-        setTimeout(() => {
-          hole.textContent = '';
-          hole.classList.remove('squashed');
-        }, 500);
-      };
-    }
-
-    function startGame() {
-      score = 0;
-      scoreEl.textContent = score;
-      timeLeft = 30;
-      timerEl.textContent = timeLeft;
-      gameOverEl.textContent = '';
-      gameActive = true;
-
-      gameInterval = setInterval(() => {
-        timeLeft--;
-        timerEl.textContent = timeLeft;
-        if (timeLeft <= 0) {
-          clearInterval(gameInterval);
-          clearInterval(bugInterval);
-          gameActive = false;
-          gameOverEl.textContent = `Game Over! Final Score: ${score}`;
-        }
-      }, 1000);
-
-      bugInterval = setInterval(showBug, 600);
-    }
-
-    startGame();
-  </script>
+  <!-- Link to the external JavaScript file -->
+  <script src="script.js"></script>
 </body>
 </html>
